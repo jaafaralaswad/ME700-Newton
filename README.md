@@ -20,11 +20,11 @@ The method stops when either $|x_{n+1} - x_n| < \epsilon_1$ or  $|f(x_n)| < \eps
 
 Unlike the bisection method, Newton-Raphson converges quadratically when $x_0$ is close to the root. However, it requires $f'(x)$, may fail if $f'(x) = 0$, and can diverge from poor initial guesses.
 
-For systems of equations  $\mathbf{F}(\mathbf{x}) = 0$, the method extends to multiple dimensions using the Jacobian matrix $J$:  
+For systems of equations  $\mathbf{F}(\mathbf{x}) = 0$, the method extends to multiple dimensions using the Jacobian matrix $\mathbf{J}$:  
 
-$$ \mathbf{x}_{n+1} = \mathbf{x}_n - J^{-1} \mathbf{F}(\mathbf{x}_n)$$
+$$ \mathbf{x}_{n+1} = \mathbf{x}_n - \mathbf{J}^{-1} \mathbf{F}(\mathbf{x}_n)$$
 
-Here, $J$ is the matrix of partial derivatives $\frac{\partial F_i}{\partial x_j}$.
+Here, $\mathbf{J}$ is the matrix of partial derivatives $\frac{\partial F_i}{\partial x_j}$.
 
 
 # Conda environment, install, and testing
