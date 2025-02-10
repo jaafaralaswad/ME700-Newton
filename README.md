@@ -53,7 +53,7 @@ Create an editable install of the newton's method code. Use the following line m
 pip install -e .
 ```
 
-You must do this in the correct directory; in order to make sure, replace the dot at the end by the directory of the folder "ME700-A1-main" that you unzipped earlier: For example, on my computer, the line would appear as follows:
+You must do this in the correct directory; in order to make sure, replace the dot at the end by the directory of the folder "ME700-Newton-main" that you unzipped earlier: For example, on my computer, the line would appear as follows:
 
 ```bash
 pip install -e /Users/jaafaralaswad/Downloads/ME700-Newton-main
