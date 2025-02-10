@@ -29,16 +29,16 @@ Here, $\mathbf{J}$ is the matrix of partial derivatives $\frac{\partial F_i}{\pa
 
 # Conda environment, install, and testing
 
-This procedure is very similar to what we did in the last class. First, you need to download the repository and unzip it. Then, to install the package, use:
+This procedure is very similar to what we did in class. First, you need to download the repository and unzip it. Then, to install the package, use:
 
 ```bash
-conda create --name bisection-method-env python=3.12
+conda create --name newton-method-env python=3.12
 ```
 
 After creating the environment (it might have already been created by you earlier), make sure to activate it, use:
 
 ```bash
-conda activate bisection-method-env
+conda activate newton-method-env
 ```
 
 Check that you have Python 3.12 in the environment. To do so, use:
@@ -47,7 +47,7 @@ Check that you have Python 3.12 in the environment. To do so, use:
 python --version
 ```
 
-Create an editable install of the bisection method code. Use the following line making sure you are in the correct directory:
+Create an editable install of the newton's method code. Use the following line making sure you are in the correct directory:
 
 ```bash
 pip install -e .
@@ -56,7 +56,7 @@ pip install -e .
 You must do this in the correct directory; in order to make sure, replace the dot at the end by the directory of the folder "ME700-A1-main" that you unzipped earlier: For example, on my computer, the line would appear as follows:
 
 ```bash
-pip install -e /Users/jaafaralaswad/Downloads/ME700-A1-main
+pip install -e /Users/jaafaralaswad/Downloads/ME700-Newton-main
 ```
 
 Now, you can test the code, make sure you are in the tests directory. You can know in which directory you are using:
@@ -74,14 +74,14 @@ cd
 On my computer, to be in the tests folder, I would use:
 
 ```bash
-cd /Users/jaafaralaswad/Downloads/ME700-A1-main/tests
+/Users/jaafaralaswad/Downloads/ME700-Newton-main/tests
 ```
 
 
 Once you are in the tests directory, use the following to run the tests:
 
 ```bash
-pytest -s tests.py
+pytest -s test_newton_method.py
 ```
 
 Code coverage should be 100%.
@@ -89,7 +89,7 @@ Code coverage should be 100%.
 To run the tutorial, make sure you are in the tutorials directory. You can navigate their as you navigated to the tests folder. On my computer, I would use:
 
 ```bash
-cd /Users/jaafaralaswad/Downloads/ME700-A1-main/tutorials
+cd /Users/jaafaralaswad/Downloads/ME700-Newton-main/tutorials
 ```
 
 Once you are there, you can use:
