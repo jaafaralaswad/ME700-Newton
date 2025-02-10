@@ -1,8 +1,8 @@
 
 import numpy as np
 import pytest
-from newton import newton, evaluate_functions, check_convergence_function, check_derivative_nonzero, update_x
-from newton_raphson import newton_raphson, evaluate_functions as eval_raphson, check_convergence, check_jacobian_singular, update_variables
+from newtonmethod.newton import newton, evaluate_functions, check_convergence_function, check_derivative_nonzero, update_x
+from newtonmethod.newton_raphson import newton, evaluate_functions, check_convergence_function, check_derivative_nonzero, update_x
 
 # Define test functions
 def f1(x):
