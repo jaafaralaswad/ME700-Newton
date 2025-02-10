@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 # Now import the functions from newton.py
-from newton import newton, evaluate_functions, check_convergence_function, check_derivative_nonzero
+from newtonmethod import newton, evaluate_functions, check_convergence_function, check_derivative_nonzero
 
 import pytest
 import numpy as np
