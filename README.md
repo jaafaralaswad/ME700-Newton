@@ -2,9 +2,9 @@
 ![OS](https://img.shields.io/badge/os-ubuntu%20%7C%20macos%20%7C%20windows-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-![GitHub Actions](https://github.com/jaafaralaswad/ME700-Newton/actions/workflows/tests.yml/badge.svg)
 
-[![codecov](https://codecov.io/gh/jaafaralaswad/ME700-Newton/branch/main/graph/badge.svg)](https://codecov.io/gh/YOUR_USERNAME/YOUR_REPO)
+[![codecov](https://codecov.io/gh/jaafaralaswad/ME700-Newton/branch/main/graph/badge.svg)](https://codecov.io/gh/jaafaralaswad/ME700-Newton) ![GitHub Actions](https://github.com/jaafaralaswad/ME700-Newton/actions/workflows/tests.yml/badge.svg)
+
 
 
 # ME700 Assignment 1: Part 1
