@@ -1,15 +1,12 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = { find = { where = ["src"] } }
-
 [project]
-name = "ME700-Newton"
-version = "0.1"
+name = "newtonmethod"
+version = "0.0.0"
 authors = [
-  { name="Jaafar Alaswad", email="jalaswad@bu.edu" },
+  { name="Jaafar", email="jalaswad@bu.edu" },
 ]
 description = "newtonmethod workflow"
 readme = "README.md"
