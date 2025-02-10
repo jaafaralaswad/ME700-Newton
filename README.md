@@ -2,22 +2,30 @@
 ![OS](https://img.shields.io/badge/os-ubuntu%20%7C%20macos%20%7C%20windows-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+[![codecov](https://codecov.io/gh/jaafaralaswad/ME700-Newton/branch/main/graph/badge.svg)](https://codecov.io/gh/jaafaralaswad/ME700-Newton) ![GitHub Actions](https://github.com/jaafaralaswad/ME700-Newton/actions/workflows/tests.yml/badge.svg)
 
 
 
 # ME700 Assignment 1: Part 1
 
-This repository presents a bisection method solver developed for the first assignment in the ME700 course. The first three numerical examples demonstrate solving algebraic equations. The fourth example applies the method to find the position of a balance force in a cantilever beam, while the fifth example computes a center of mass for a given number of masses on a 1D axis.
+This repository presents a newton-raphson method solver developed for the first assignment in the ME700 course. The first three numerical examples demonstrate solving algebraic equations. The fourth example applies the method to find the reaction bending moment in a cantilever beam, while the fifth example computes the components of a velocity vector.
 
-# The Bisection Method
+# Newton's Method
 
-The bisection method is a classical numerical technique for finding real roots of algebraic equations. It is based on the intermediate value theorem from calculus, which states that if a continuous function takes on opposite signs at two points, there must be at least one root between them. The method's name reflects how it works: in each iteration, the interval is bisected, and the half containing a sign change is retained for the next iteration, while the other half is discarded.
+Newton's method is an efficient numerical technique for finding real roots of equations. It iteratively refines an initial guess, $x_0$, using the formula:  
 
-The user must define the function, $f(x)$, and specify the lower and upper bounds of the interval, $a$ and $b$, respectively. To ensure the presence of a root, the function values at these bounds must have opposite signs. If both values share the same sign, the existence of a root within the interval is not guaranteed. In such cases, an error message is displayed, prompting the user to select a different set of boundaries.
+$$ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} $$
 
-The bisection method is an iterative process, and the user determines the termination criteria based on the required accuracy, which depends on the specific application. This solver employs two termination criteria, ending the iterations when either is satisfied. The first criterion is when $|c-a|< \epsilon_1$, meaning the half-interval size becomes smaller than a predefined threshold. The second criterion is when $|f(c)|< \epsilon_2$, indicating that the function value is sufficiently close to zero. The user must specify both $\epsilon_1$ and $\epsilon_2$, with tighter tolerances providing greater accuracy at the cost of additional iterations.
+The method stops when either $|x_{n+1} - x_n| < \epsilon_1$ or  $|f(x_n)| < \epsilon_2$, ensuring sufficient accuracy.  
 
-The concept of the bisection method is straightforward. However, the method has significant limitations. First, the user must identify an interval that contains a root.  Second, the method can only find a single root at a time; for equations with multiple roots, the user must test different intervals to locate each one. Third, the method has a relatively slow convergence rate, often requiring more iterations compared to more advanced numerical techniques.
+Unlike the bisection method, Newton-Raphson converges quadratically when $x_0$ is close to the root. However, it requires $f'(x)$, may fail if $f'(x) = 0$, and can diverge from poor initial guesses.
+
+For systems of equations  $\mathbf{F}(\mathbf{x}) = 0$, the method extends to multiple dimensions using the Jacobian matrix $\mathbf{J}$:  
+
+$$ \mathbf{x}_{n+1} = \mathbf{x}_n - \mathbf{J}^{-1} \mathbf{F}(\mathbf{x}_n)$$
+
+Here, $\mathbf{J}$ is the matrix of partial derivatives $\frac{\partial F_i}{\partial x_j}$.
+
 
 # Conda environment, install, and testing
 
