@@ -168,4 +168,3 @@ def test_newton_raphson_max_iterations():
 
     with pytest.raises(RuntimeError, match="Maximum iterations reached without convergence."):
         newton_raphson.newton_raphson(f2, df2x, df2y, g2, dg2x, dg2y, x0, y0, epsilon, max_iter)
-#test
