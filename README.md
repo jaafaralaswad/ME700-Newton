@@ -1,4 +1,6 @@
-# ME700 Assignment 1: Warm-up
+![GitHub Actions](https://github.com/jaafaralaswad/ME700-Newton/actions/workflows/tests.yml/badge.svg)
+
+# ME700 Assignment 1: Part 1
 
 This repository presents a bisection method solver developed for the first assignment in the ME700 course. The first three numerical examples demonstrate solving algebraic equations. The fourth example applies the method to find the position of a balance force in a cantilever beam, while the fifth example computes a center of mass for a given number of masses on a 1D axis.
 
