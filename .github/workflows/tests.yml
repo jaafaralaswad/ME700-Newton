@@ -1,44 +1,29 @@
-name: Run Tests
+name: Python CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]  # Trigger on push to main
   pull_request:
-    branches:
-      - main
+    branches: [main]  # Trigger on PR to main
 
 jobs:
   test:
-    runs-on: ${{ matrix.platform }}
-
-    strategy:
-      matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
-        python-version: ["3.12.8"]
+    runs-on: ubuntu-latest  # Runs the job on an Ubuntu machine
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checkout your repo's code
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.12  # Change this to your desired Python version
 
       - name: Install dependencies
-        run: pip install -e .
-
-      - name: Install test dependencies
-        run: pip install pytest pytest-cov
+        run: |
+          python -m pip install --upgrade pip  # Upgrade pip
+          pip install -e .  # Install your project in editable mode
 
       - name: Run tests with coverage
-        run: pytest --cov=newtonmethod --cov-report=xml
-        # Replace 'my_package' with your actual package name
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-          fail_ci_if_error: true  # Ensure failure if upload fails
+        run: |
+          PYTHONPATH=src pytest --cov=newtonmethod --cov-report=xml  # Run pytest with coverage
