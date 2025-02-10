@@ -70,10 +70,49 @@ def test_newton_nonconvergence():
     with pytest.raises(ValueError):
         newton.newton(f1, df1, x0, epsilon_1, epsilon_2, max_iter)
 
+def test_newton_forces_convergence_on_step_size(capsys):
+    """Forces Newton's method to enter the `if converged:` block due to step size convergence."""
+    def f(x):
+        return x - 1  # Root is exactly at x = 1
+
+    def df(x):
+        return 1  # Constant derivative (nonzero)
+
+    x0 = 0.9999  # Start very close to root
+    epsilon_1 = 1e-2 
+    epsilon_2 = 1e-6
+    max_iter = 50
+
+    x, converged = newton.newton(f, df, x0, epsilon_1, epsilon_2, max_iter)
+
+    assert converged is True 
+    assert np.isclose(x, 1.0)  
+
+    captured = capsys.readouterr()
+    assert "Root found at x = 1.00000000 after" in captured.out 
+
+
+def test_newton_max_iterations():
+    """Forces Newton's method to reach max iterations without converging."""
+    def f(x):
+        return np.exp(x) - 1000  # Exponential growth, takes many iterations to reach 0
+
+    def df(x):
+        return np.exp(x)  # Always positive, no zero crossings
+
+    x0 = 0.0
+    epsilon_1 = 1e-6
+    epsilon_2 = 1e-6
+    max_iter = 1  # Too few iterations to reach the root
+
+    with pytest.raises(RuntimeError, match="Maximum iterations reached without convergence."):
+        newton.newton(f, df, x0, epsilon_1, epsilon_2, max_iter)
+
+
 # Test evaluate_functions for Newton-Raphson
 def test_evaluate_functions_newton_raphson():
     x, y = 1, 1
-    F, J = newton_raphson.evaluate_functions(f2, df2x, df2y, g2, dg2x, dg2y, x, y)  # ✅ Corrected function call
+    F, J = newton_raphson.evaluate_functions(f2, df2x, df2y, g2, dg2x, dg2y, x, y) 
     assert np.isclose(F[0], -2)
     assert np.isclose(F[1], 0)
     assert np.isclose(J[0, 0], 2)
@@ -85,24 +124,24 @@ def test_evaluate_functions_newton_raphson():
     (np.array([0.1, 0.1]), 1e-3, False),
 ])
 def test_check_convergence(F, epsilon, expected):
-    assert newton_raphson.check_convergence(F, epsilon) == expected  # ✅ Correct function call
+    assert newton_raphson.check_convergence(F, epsilon) == expected 
 
 # Test check_jacobian_singular
 def test_check_jacobian_singular():
     J = np.array([[2.0, 2.0], [-2.0, -2.0]])
     with pytest.raises(ValueError):
-        newton_raphson.check_jacobian_singular(J)  # ✅ Allow expected ValueError
+        newton_raphson.check_jacobian_singular(J)
 
 def test_update_variables():
-    J = np.array([[2.0, 1.0], [1.0, 2.0]])  # ✅ Square (2x2) matrix
-    F = np.array([-2.0, -2.0]).reshape(2, 1)  # ✅ Convert to column vector
-    x, y = newton_raphson.update_variables(1.0, 1.0, J, F)  # Compute update
+    J = np.array([[2.0, 1.0], [1.0, 2.0]])
+    F = np.array([-2.0, -2.0]).reshape(2, 1)
+    x, y = newton_raphson.update_variables(1.0, 1.0, J, F)
 
     print("\nDEBUG: Expected x = 1.66667, Actual x =", x)
     print("DEBUG: Expected y = 1.66667, Actual y =", y)
 
-    assert np.isclose(x, 1.66667)  # ✅ Fixed expected value
-    assert np.isclose(y, 1.66667)  # ✅ Fixed expected value
+    assert np.isclose(x, 1.66667)
+    assert np.isclose(y, 1.66667)
 
 # Test Newton-Raphson method for system of equations
 def test_newton_raphson_success():
@@ -118,4 +157,14 @@ def test_newton_raphson_nonconvergence():
     epsilon = 1e-6
     max_iter = 10
     with pytest.raises(ValueError):
+        newton_raphson.newton_raphson(f2, df2x, df2y, g2, dg2x, dg2y, x0, y0, epsilon, max_iter)
+
+
+def test_newton_raphson_max_iterations():
+    """Forces Newton-Raphson to reach max iterations without converging."""
+    x0, y0 = 1.0, 1.0
+    epsilon = 1e-12  # Very strict tolerance
+    max_iter = 2  # Too few iterations to allow convergence
+
+    with pytest.raises(RuntimeError, match="Maximum iterations reached without convergence."):
         newton_raphson.newton_raphson(f2, df2x, df2y, g2, dg2x, dg2y, x0, y0, epsilon, max_iter)
