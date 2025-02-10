@@ -35,7 +35,7 @@ This procedure is very similar to what we did in class. First, you need to downl
 conda create --name newton-method-env python=3.12
 ```
 
-After creating the environment (it might have already been created by you earlier), make sure to activate it, use:
+After creating the environment, make sure to activate it, use:
 
 ```bash
 conda activate newton-method-env
