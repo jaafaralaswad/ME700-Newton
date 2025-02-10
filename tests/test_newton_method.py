@@ -1,14 +1,10 @@
-import sys
-from pathlib import Path
-
-# # Add the project folder (parent of 'tests') to the Python path
-# sys.path.append(str(Path(__file__).resolve().parent.parent))
-
-# Now import the functions from newton.py
 from newtonmethod import newton, evaluate_functions, check_convergence_function, check_derivative_nonzero
-
-import pytest
 import numpy as np
+from pathlib import Path
+import pytest
+import re
+
+
 
 # Test function and its derivative is being calculated properly using f(x) = x^2 - 4 and f'(x) = 2x
 def test_evaluate_functions():
