@@ -1,8 +1,8 @@
 import sys
 from pathlib import Path
 
-# Add the project folder (parent of 'tests') to the Python path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+# # Add the project folder (parent of 'tests') to the Python path
+# sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 # Now import the functions from newton.py
 from newtonmethod import newton, evaluate_functions, check_convergence_function, check_derivative_nonzero
