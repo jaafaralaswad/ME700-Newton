@@ -1,5 +1,7 @@
-# Import NumPy library
+import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
+from typing import Callable, Union
 
 def newton(f, df, x0, epsilon_1, epsilon_2, max_iter):
     """

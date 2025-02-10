@@ -1,5 +1,7 @@
-# Import NumPy library
+import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
+from typing import Callable, Union
 
 def newton_raphson(f, dfx, dfy, g, dgx, dgy, x0, y0, epsilon, max_iter):
     """
