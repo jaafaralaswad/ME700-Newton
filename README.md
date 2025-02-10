@@ -3,7 +3,6 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 
-[![codecov](https://codecov.io/gh/jaafaralaswad/ME700-Newton/branch/main/graph/badge.svg)](https://codecov.io/gh/jaafaralaswad/ME700-Newton) ![GitHub Actions](https://github.com/jaafaralaswad/ME700-Newton/actions/workflows/tests.yml/badge.svg)
 
 
 
