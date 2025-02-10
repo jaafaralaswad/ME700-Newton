@@ -30,7 +30,7 @@ jobs:
         run: pip install pytest pytest-cov
 
       - name: Run tests with coverage
-        run: pytest --cov=./newton.py --cov-report=xml
+        run: pytest --cov=newton --cov-report=xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
