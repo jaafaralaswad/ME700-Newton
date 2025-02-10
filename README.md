@@ -18,7 +18,14 @@ $$ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} $$
 
 The method stops when either $|x_{n+1} - x_n| < \epsilon_1$ or  $|f(x_n)| < \epsilon_2$, ensuring sufficient accuracy.  
 
-Unlike the bisection method, Newton-Raphson converges quadratically when $x_0$ is close to the root. However, it requires $f'(x)$, may fail if $f'(x) = 0$, and can diverge from poor initial guesses. Despite these limitations, it remains one of the fastest root-finding methods when applicable.
+Unlike the bisection method, Newton-Raphson converges quadratically when $x_0$ is close to the root. However, it requires $f'(x)$, may fail if $f'(x) = 0$, and can diverge from poor initial guesses.
+
+For systems of equations  $\mathbf{F}(\mathbf{x}) = 0$, the method extends to multiple dimensions using the Jacobian matrix $J$:  
+
+$$ \mathbf{x}_{n+1} = \mathbf{x}_n - J^{-1} \mathbf{F}(\mathbf{x}_n)$$
+
+Here, $J$ is the matrix of partial derivatives $\frac{\partial F_i}{\partial x_j}$.
+
 
 # Conda environment, install, and testing
 
