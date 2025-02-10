@@ -61,3 +61,24 @@ def test_newton_max_iterations_exceeded():
     # Run the method with a very small epsilon and a low max_iter (to make sure it exceeds)
     with pytest.raises(RuntimeError, match="Maximum iterations reached without convergence."):
         newton(f, df, x0=0.5, epsilon_1=0.01, epsilon_2=0.01, max_iter=3)
+
+
+def test_newton_max_iterations_exceeded():
+    def f(x):
+        return x**10 - 1  # Hard to converge quickly
+    def df(x):
+        return 10*x**9
+
+    with pytest.raises(RuntimeError, match="Maximum iterations reached without convergence."):
+        newton(f, df, x0=0.5, epsilon_1=0.01, epsilon_2=0.01, max_iter=3)
+
+
+
+def test_newton_zero_derivative():
+    def f(x):
+        return x**2 - 4
+    def df(x):
+        return 0  # This will trigger the error
+
+    with pytest.raises(ValueError, match="Derivative is zero"):
+        newton(f, df, x0=1, epsilon_1=0.01, epsilon_2=0.01, max_iter=10)
