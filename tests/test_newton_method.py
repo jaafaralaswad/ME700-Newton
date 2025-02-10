@@ -46,19 +46,15 @@ def test_check_convergence_function(fx, epsilon_2, expected):
 
 # Test check_derivative_nonzero
 def test_check_derivative_nonzero():
-    assert check_derivative_nonzero(2) == True
+    assert check_derivative_nonzero(2.0) is None
     with pytest.raises(ZeroDivisionError):
-        check_derivative_nonzero(0)
+        check_derivative_nonzero(0.0)
 
-# Test update_x
+# Test update_x for Newton method
 def test_update_x():
-    x_old = 2.0
-    fx = -1.0
-    dfx = 2.0
-    x_new = update_x(x_old, fx, dfx)
-    assert np.isclose(x_new, 2.5)
+    assert np.isclose(update_x(2.0, 4.0, 2.0), 0.0)
 
-# Test Newton method
+# Test Newton method for single variable
 def test_newton_success():
     x0 = 2.0
     epsilon_1 = 1e-6
@@ -68,7 +64,7 @@ def test_newton_success():
     assert np.isclose(x, 2.0) or np.isclose(x, -2.0)
 
 def test_newton_nonconvergence():
-    x0 = 0.0
+    x0 = 0.0  # Derivative is zero, should raise error
     epsilon_1 = 1e-6
     epsilon_2 = 1e-6
     max_iter = 10
@@ -77,32 +73,33 @@ def test_newton_nonconvergence():
 
 # Test evaluate_functions for Newton-Raphson
 def test_evaluate_functions_newton_raphson():
-    x, y = 1.0, 1.0
-    fx, dfx = eval_raphson(f2, df2x, df2y, x, y)
-    assert np.isclose(fx, -2.0)
-    assert np.isclose(dfx, 2.0)
+    x, y = 1, 1
+    fx, dfx, dfy = eval_raphson(f2, df2x, df2y, x, y)
+    assert np.isclose(fx, -2)
+    assert np.isclose(dfx, 2)
+    assert np.isclose(dfy, 2)
 
 # Test check_convergence for Newton-Raphson
-def test_check_convergence():
-    assert check_convergence(0.001, 0.01) == True
-    assert check_convergence(0.1, 0.01) == False
+@pytest.mark.parametrize("fx, fy, epsilon, expected", [
+    (0.0001, 0.0001, 1e-3, True),
+    (0.1, 0.1, 1e-3, False),
+])
+def test_check_convergence(fx, fy, epsilon, expected):
+    assert check_convergence(fx, fy, epsilon) == expected
 
 # Test check_jacobian_singular
 def test_check_jacobian_singular():
-    assert check_jacobian_singular(1, 1, 1, 1) == False
+    assert check_jacobian_singular(2.0, 2.0, -2.0, -2.0) is None
     with pytest.raises(ZeroDivisionError):
-        check_jacobian_singular(0, 0, 0, 0)
+        check_jacobian_singular(0.0, 0.0, 0.0, 0.0)
 
-# Test update_variables
+# Test update_variables for Newton-Raphson
 def test_update_variables():
-    x_old, y_old = 1.0, 1.0
-    fx, fy = -1.0, -1.0
-    J_inv = np.array([[0.5, 0], [0, 0.5]])
-    x_new, y_new = update_variables(x_old, y_old, fx, fy, J_inv)
-    assert np.isclose(x_new, 1.5)
-    assert np.isclose(y_new, 1.5)
+    x, y = update_variables(1.0, 1.0, 2.0, 2.0, -2.0, -2.0)
+    assert np.isclose(x, 0.0)
+    assert np.isclose(y, 0.0)
 
-# Test Newton-Raphson method
+# Test Newton-Raphson method for system of equations
 def test_newton_raphson_success():
     x0, y0 = 1.0, 1.0
     epsilon = 1e-6
@@ -112,7 +109,7 @@ def test_newton_raphson_success():
     assert np.isclose(x, y)
 
 def test_newton_raphson_nonconvergence():
-    x0, y0 = 0.0, 0.0
+    x0, y0 = 0.0, 0.0  # Singular point
     epsilon = 1e-6
     max_iter = 10
     with pytest.raises(ZeroDivisionError):
